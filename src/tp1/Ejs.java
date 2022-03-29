@@ -27,8 +27,10 @@ public class Ejs {
                 fib1= aux;
             }
             return fib1;
-        }else{
+        }else if(n ==1 ){
             return 1;
+        }else{
+            return 0;
         }
     }
     public int exercise_2_c_recursive(int n){
@@ -60,7 +62,7 @@ public class Ejs {
     }
 
     public int exercise_6_b_iii_iterative(int n){
-        if(isAPrimeNumber(n) && n != 1) return 2;
+        if(isAPrimeNumber(n) && n != 1) return 1;
         int counter = 0;
         for (int i = 1; i <=  n/2; i++) {
             if (n % i == 0 && isAPrimeNumber(i)) counter +=1;
@@ -68,7 +70,7 @@ public class Ejs {
         return counter;
     }
     public boolean isAPrimeNumber(int n){
-        if(n == 1) return true;
+        if(n == 1) return false;
         int counter = 0;
         for (int i = 1; i <=  n/2 ; i++) {
             if(n % i == 0) counter += 1;
@@ -93,21 +95,17 @@ public class Ejs {
         return count + coefs[0]; // al final de to-do le sumo el ultimo num
     }
     public int exercise_8_recursive(int[] coefs, int n){
-        return exercise_8_recursive_aux(coefs, n , coefs.length - 1, 0);
+        return exercise_8_recursive_aux(coefs, n , 0);
     }
     // 3 -> 3*2= 6 -> 6+2 = 8 -> 8*2= 16 -> termina el for. 16+1 = 17
 
     // 3x^2 + 2x + 1
 
-    private int exercise_8_recursive_aux(int[] coefs, int n, int pointer,int count) {
-        if(pointer == 0){
-            return coefs[0]; // 1
+    private int exercise_8_recursive_aux(int[] coefs, int n, int pointer) {
+        if(pointer == coefs.length - 1){
+            return coefs[pointer];
         }else{
-            count += coefs[pointer];
-            count = count * n;
-            return count + exercise_8_recursive_aux(coefs, n, pointer - 1, count);
-            // 6
-            // 4
+            return coefs[pointer] + n*exercise_8_recursive_aux(coefs, n, pointer + 1);
         }
     }
 }
