@@ -87,20 +87,27 @@ public class Ejs {
     public int exercise_8_iterative(int[] coefs, int n){
         int count = 0;
         for (int i = coefs.length - 1; i > 0 ; i--) {
-            count += coefs[i];
-            count = count * n;
+            count += coefs[i]; // count es 0, le sumo el primer coeficiente.
+            count = count * n; // multiplico el count por el valor de x. (n). Count seria lo de adentro del parentesis
         }
-        return count + coefs[0];
+        return count + coefs[0]; // al final de to-do le sumo el ultimo num
     }
     public int exercise_8_recursive(int[] coefs, int n){
-        return exercise_8_recursive_aux(coefs, n , coefs.length - 1);
+        return exercise_8_recursive_aux(coefs, n , coefs.length - 1, 0);
     }
+    // 3 -> 3*2= 6 -> 6+2 = 8 -> 8*2= 16 -> termina el for. 16+1 = 17
 
-    private int exercise_8_recursive_aux(int[] coefs, int n, int pointer) {
+    // 3x^2 + 2x + 1
+
+    private int exercise_8_recursive_aux(int[] coefs, int n, int pointer,int count) {
         if(pointer == 0){
-            return coefs[0];
+            return coefs[0]; // 1
         }else{
-            return coefs[pointer] * n + exercise_8_recursive_aux(coefs, n, pointer - 1);
+            count += coefs[pointer];
+            count = count * n;
+            return count + exercise_8_recursive_aux(coefs, n, pointer - 1, count);
+            // 6
+            // 4
         }
     }
 }
